@@ -26,7 +26,6 @@ module.exports = (sequelize) => {
 			background_image: {
 				type: DataTypes.STRING,
 				isUrl: true,
-				allowNull: false,
 			},
 			released: {
 				type: DataTypes.STRING,

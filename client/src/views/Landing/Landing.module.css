@@ -1,0 +1,45 @@
+.all{
+    background-image: url('../../img/FondoLanding.jpg');
+    background-size:cover;
+    
+    max-height: 1000px;
+    background-color: #312c2c;
+}
+
+
+.landing {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+   height: 100vh;
+   
+}
+
+    
+
+.button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: background-color 0.3s,
+    color 0.3s;transform: translate(-50%, -50%);
+}
+    
+.button:hover {
+    background-color: #e712e3;
+    color: black;
+}
+
+  
+@media (min-with:350px) and (max-with:1024px) {
+    .App {
+        background-size: cover;
+        width: 100vw;
+    }    
+}

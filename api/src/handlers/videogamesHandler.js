@@ -54,24 +54,20 @@ const postVideogamesHandler = async (req, res) => {
 			genres,
 		} = req.body;
 
-		if (!name) {
-			return res.status(400).send("we missing info");
-		} else {
-			const newVideogame = await createVideogame(
-				name,
-				description,
-				platforms,
-				rating,
-				background_image,
-				released,
-				genres
-			);
+		const newVideogame = await createVideogame(
+			name,
+			description,
+			platforms,
+			rating,
+			background_image,
+			released,
+			genres
+		);
 
-			if (newVideogame.error) {
-				return res.status(404).send(newVideogame.error);
-			}
-			return res.status(200).send("Videogame created");
+		if (newVideogame.error) {
+			return res.status(404).send(newVideogame.error);
 		}
+		return res.status(200).send("Videogame created");
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}

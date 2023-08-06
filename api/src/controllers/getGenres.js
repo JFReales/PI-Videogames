@@ -4,7 +4,7 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY } = process.env;
 //Se importan los modelos
-const { Videogame, Genre } = require("../db");
+const { Genre } = require("../db");
 ///Se declara una función asíncrona
 const getGenres = async () => {
 	///se utiliza la funcion axios.get para realizar una solicitud
