@@ -1,0 +1,37 @@
+.container{
+    display: flex;
+    justify-content: end;
+    
+}
+
+.error{
+    color: red;
+    margin: 0;
+    font-size: small;
+}
+
+
+.input{
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid rgb(151, 26, 197);
+    color: white;
+    font-size: 1.2rem;
+}
+
+.button {
+    font-size: 1.2rem;
+    background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
+    color: white;
+    border: 2px solid rgb(151, 26, 197);
+    border-radius: 10px;
+    transition: background-color 0.3s,
+    color 0.3s;
+    margin-left: 10px;
+
+}
+    
+.button:hover {
+    color: rgb(151, 26, 197);
+}
+

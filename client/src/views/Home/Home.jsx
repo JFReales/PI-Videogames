@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
-import VideogamesContainer from "../../components/VideogamesContainer/VideogamesContainer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginado from "../../components/Paginado/Paginado";
 import {
 	cleanDetail,
 	filterByGenres,
@@ -12,6 +10,9 @@ import {
 	getVideogames,
 	orderBy,
 } from "../../redux/actions";
+import style from "./Home.module.css";
+import Paginado from "../../components/Paginado/Paginado";
+import VideogamesContainer from "../../components/VideogamesContainer/VideogamesContainer";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Home = () => {
 	let filteredGames = useSelector((state) => state.filtered);
 	let allGenres = useSelector((state) => state.genres);
 
-	filteredGames.length > 0 && (allVideogames = filteredGames);
+	filteredGames?.length > 0 && (allVideogames = filteredGames);
 
 	const [paginaActual, setPaginaActual] = useState(1);
 	const [videogamesPorPagina, setVideogamesPorPagina] = useState(15);
@@ -37,63 +38,89 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(getVideogames());
-		dispatch(getGenres);
+		dispatch(getGenres());
 
 		return () => dispatch(cleanDetail());
 	}, [dispatch]);
 
-	const origenHandler = (event) => {
+	const handleOrigen = (event) => {
 		dispatch(filterOrigen(event.target.value));
 	};
 
-	const orderHandler = (event) => {
+	const handleOrder = (event) => {
 		dispatch(filterGames(event.target.value));
 	};
 
-	const ratingHandler = (event) => {
+	const handleRating = (event) => {
 		dispatch(orderBy(event.target.value));
 	};
 
-	const genresHandler = (event) => {
+	const handleGenres = (event) => {
 		dispatch(filterByGenres(event.target.value));
 	};
 
 	return (
-		<div>
-			<div>
+		<div className={style.all}>
+			<div className={style.home}>
 				<div>
-					<select onChange={origenHandler}>
-						<option value="All">All</option>
-						<option value="api">Original</option>
-						<option value="bd">Created</option>
-					</select>
-					<select onChange={orderHandler}>
-						<option value="A">Original</option>
-						<option value="Original">A - Z</option>
-						<option value="D">Z - A</option>
-					</select>
-					<select onChange={ratingHandler}>
-						<option value="Original">Original</option>
-						<option value="TR">Top Rating</option>
-						<option value="LR">Low Rating</option>
-					</select>
-					<select onChange={genresHandler}>
-						<option value="All">All Genres</option>
-						{allGenres.map((genres) => (
-							<option value={genres.name} key={genres.name}>
-								{genres.name}
-							</option>
-						))}
-					</select>
+					<div className={style.filters}>
+						<div className={style.filter}>
+							Origen:
+							<select className={style.select} onChange={handleOrigen}>
+								<option value="All">All</option>
+								<option value="api">Original</option>
+								<option value="bd">Created</option>
+							</select>
+						</div>
+						<div className={style.filter}>
+							Name:
+							<select className={style.select} onChange={handleOrder}>
+								<option value="A">Original</option>
+								<option value="Original">A - Z</option>
+								<option value="D">Z - A</option>
+							</select>
+						</div>
+						<div className={style.filter}>
+							Rating:
+							<select className={style.select} onChange={handleRating}>
+								<option value="Original">Original</option>
+								<option value="TR">Top Rating</option>
+								<option value="LR">Low Rating</option>
+							</select>
+						</div>
+						<div className={style.filter}>
+							Genres:
+							<select className={style.select} onChange={handleGenres}>
+								<option value="All">All Genres</option>
+								{allGenres?.map((genres) => (
+									<option value={genres.name} key={genres.name}>
+										{genres.name}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
+					<div className={style.paginado}>
+						<Paginado
+							pagina={pagina}
+							videogamesPorPagina={videogamesPorPagina}
+							allVideogames={allVideogames.length}
+							paginaActual={paginaActual}
+						/>
+					</div>
+					<div className={style.videogamesContainer}>
+						<VideogamesContainer videogamesActual={videogamesActual} />
+					</div>
+					<div className={style.paginado}>
+						<Paginado
+							pagina={pagina}
+							videogamesPorPagina={videogamesPorPagina}
+							allVideogames={allVideogames.length}
+							paginaActual={paginaActual}
+						/>
+					</div>
 				</div>
 			</div>
-			<VideogamesContainer videogamesActual={videogamesActual} />
-			<Paginado
-				pagina={pagina}
-				videogamesPorPagina={videogamesPorPagina}
-				allVideogames={allVideogames.length}
-				paginaActual={paginaActual}
-			/>
 		</div>
 	);
 };

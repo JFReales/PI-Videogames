@@ -9,6 +9,8 @@ import {
 	ORDER_BY,
 	ORDER_BY_RATING,
 	FILTER_BY_GENRES,
+	CREATE_VIDEOGAME,
+	GET_PLATFORMS,
 } from "./actions";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
 	genres: [],
 	detail: {},
 	filtered: [],
+	platforms: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +35,15 @@ const rootReducer = (state = initialState, action) => {
 
 		case GET_GENRES:
 			return { ...state, genres: action.payload };
+
+		case GET_PLATFORMS:
+			return { ...state, platforms: action.payload };
+
+		case CREATE_VIDEOGAME:
+			return {
+				...state,
+				videogames: [...state.videogames, action.payload],
+			};
 
 		case FILTER_BY_ORIGEN:
 			let videogamesOrigin = [...state.allGames];
@@ -59,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
 					filtered: [...action.payload],
 				};
 			} catch (error) {
-				throw new Error("Personaje no enontrado");
+				throw new Error("Videojuego no encontrado");
 			}
 
 		case ORDER_BY:
@@ -102,7 +114,7 @@ const rootReducer = (state = initialState, action) => {
 					(a, b) => b.rating - a.rating
 				);
 			} else {
-				videogamesRating = allVideogamesRating.sort(
+				videogamesSortRating = allVideogamesRating.sort(
 					(a, b) => b.rating - a.rating
 				);
 			}
@@ -121,7 +133,7 @@ const rootReducer = (state = initialState, action) => {
 			};
 
 		case FILTER_BY_GENRES:
-			let videogamesFilterGenre = [...state.filtered];
+			let videogamesFilterGenre = [...state.videogames];
 
 			if (videogamesFilterGenre.length > 0) {
 				videogamesFilterGenre = videogamesFilterGenre.filter((game) =>
@@ -135,15 +147,12 @@ const rootReducer = (state = initialState, action) => {
 
 			if (action.payload === "All") {
 				videogamesFilterGenre = initialState.videogames;
-			} else {
-				if (
-					videogamesFilterGenre.length === 0 &&
-					videogamesFilterGenre !== "All"
-				) {
-					window.alert("No hay coincidencias");
-					videogamesFilterGenre = [...state.filtered];
-				}
 			}
+			if (videogamesFilterGenre.length === 0 && action.payload !== "All") {
+				window.alert("No hay coincidencias");
+				videogamesFilterGenre = [...state.videogames];
+			}
+
 			return {
 				...state,
 				filtered: videogamesFilterGenre,

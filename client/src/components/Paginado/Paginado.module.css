@@ -1,0 +1,22 @@
+.button{
+    
+    font-size: 1rem;
+    background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
+    color: white;
+    border: 2px solid rgb(151, 26, 197);
+    border-radius: 10px;
+    transition: background-color 0.3s,
+    color 0.3s;
+    margin-right: 15px;
+}
+
+
+.button:hover{
+    color: rgb(151, 26, 197);
+    
+}
+
+.paginas{
+    display: flex;
+    
+}

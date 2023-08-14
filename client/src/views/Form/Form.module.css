@@ -1,0 +1,147 @@
+.all{
+    
+    background-image: url("../../img/FondoTodos.jpg");
+    background-size:contain;
+    
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.formContainer{
+    border: 5px solid rgb(151, 26, 197);
+    border-radius: 10px;
+    background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
+    width: 795px;
+    height: 850px;
+    
+
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 40px;
+}
+
+.name{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.detail{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+.image{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.platforms{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.released{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.rating{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.genres{
+    display: flex;
+    margin: auto;
+    color: white;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 25px;
+
+}
+
+.button{
+    font-size: 2rem;
+    background-color: transparent;
+    color: white;
+    border: 2px solid rgb(151, 26, 197);
+    border-radius: 5px;
+    transition: background-color 0.3s,
+    color 0.3s
+}
+
+.button:hover{
+    color: rgb(151, 26, 197)
+}
+
+.input{
+    margin-left: 15px;
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid rgb(151, 26, 197);
+    color: white;
+    font-size: 1.2rem;
+    
+}
+
+.check{
+    appearance: none;
+    background-color:   black;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='black' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+   
+}
+
+.check:checked{
+    background-color: blueviolet;
+}
+
+
+
+.label{
+    color: white;
+    
+}
+
+.errors{
+    font-size: 15px;
+    display: flex;
+    margin: auto;
+    color: red;
+}

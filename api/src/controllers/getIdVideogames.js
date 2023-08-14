@@ -20,7 +20,7 @@ const getIdVideogame = async (id, origen) => {
 			background_image: resp.data.background_image,
 			released: resp.data.released,
 			rating: resp.data.rating,
-			//// Los valores de genres se obtienen mediante el uso de métodos de arreglo
+			//// Los valores de platforms y genres se obtienen mediante el uso de métodos de arreglo
 			///  (map) para mapear y extraer la información específica.
 			platforms: resp.data.platforms.map((p) => p.platform.name),
 			genres: resp.data.genres.map((e) => e.name),

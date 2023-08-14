@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect } from "react";
+import style from "./Paginado.module.css";
 
 const Paginado = ({
 	videogamesPorPagina,
@@ -29,20 +30,21 @@ const Paginado = ({
 	}, [handlerPagina, paginaActual, paginasTotales]);
 
 	return (
-		<nav>
-			<ul>
-				{numeroDePaginas.map((numero) => (
-					<li key={numero}>
+		<div className={style.paginas}>
+			<nav>
+				<ul className={style.buttonContainer}>
+					{numeroDePaginas.map((numero) => (
 						<button
+							key={numero}
 							onClick={() => handlerPagina(numero)}
-							className={`${numero === paginaActual} ? ""`}
+							className={style.button}
 						>
 							{numero}
 						</button>
-					</li>
-				))}
-			</ul>
-		</nav>
+					))}
+				</ul>
+			</nav>
+		</div>
 	);
 };
 

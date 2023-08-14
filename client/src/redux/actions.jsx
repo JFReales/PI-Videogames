@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-catch */
+
 import axios from "axios";
 
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
@@ -10,6 +11,8 @@ export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
 export const ORDER_BY = "ORDER_BY";
 export const FILTER_BY_ORIGEN = "FILTER_BY_ORIGEN";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
+export const CREATE_VIDEOGAME = "CREATE_VIDEOGAMES";
+export const GET_PLATFORMS = "GET_PLATFORMS";
 
 export const getVideogames = () => {
 	return async function (dispatch) {
@@ -87,6 +90,23 @@ export const getGenres = () => {
 	};
 };
 
+export const getPlatforms = () => {
+	return async function (dispatch) {
+		try {
+			const response = await axios.get("http://localhost:3001/platforms");
+			const arrayObjetos = response.data.map((valor, indice) => {
+				return { id: indice + 1, valor: valor };
+			});
+			return dispatch({
+				type: GET_PLATFORMS,
+				payload: arrayObjetos,
+			});
+		} catch (error) {
+			throw error;
+		}
+	};
+};
+
 export const filterByGenres = (genres) => {
 	return {
 		type: FILTER_BY_GENRES,
@@ -108,9 +128,28 @@ export const filterOrigen = (order) => {
 	};
 };
 
-export function orderBy(params) {
+export const orderBy = (params) => {
 	return {
 		type: ORDER_BY_RATING,
 		payload: params,
 	};
-}
+};
+
+export const createVideogame = (payload) => {
+	return async function (dispatch) {
+		try {
+			const response = await axios.post(
+				"http://localhost:3001/videogames",
+				payload
+			);
+
+			return dispatch({
+				type: CREATE_VIDEOGAME,
+				payload: response,
+			});
+		} catch (error) {
+			// Aquí puedes manejar el error de acuerdo a tus necesidades
+			alert(error.request.response);
+		}
+	};
+};

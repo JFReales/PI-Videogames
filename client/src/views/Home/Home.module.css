@@ -1,0 +1,48 @@
+.all{
+    background-image: url("../../img/FondoTodos.jpg");
+    background-size:contain;
+    /* background-repeat: no-repeat;  */
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: max-content;   
+}
+
+
+
+.filter{
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid rgb(151, 26, 197);
+    color: white;
+    font-size: 1.2rem;
+    float: left;
+    margin-left: 10px;
+}
+
+.filters{
+    margin-top: 10px;
+    display: flex;
+    flex-direction:initial
+   
+}
+
+.videogamesContainer{
+    margin-top: 10px;
+}
+
+.select{
+    background-color: black;
+    border-radius: 5px;
+    border: 1px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.paginado{
+    display: flex;
+    
+}

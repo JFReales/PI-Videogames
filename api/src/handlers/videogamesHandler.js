@@ -5,7 +5,7 @@ const { getVideogameQuery } = require("../controllers/getVideogamesQuery");
 
 const getVideogamesHandler = async (req, res) => {
 	const { name } = req.query;
-	console.log(name);
+
 	if (name) {
 		try {
 			// si se recibe nombre ///

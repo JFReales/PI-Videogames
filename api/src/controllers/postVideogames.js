@@ -22,7 +22,7 @@ const createVideogame = async (
 
 	if (nombre) {
 		return {
-			error: "The game already exist",
+			error: "El juego ya existe",
 		};
 	}
 	// el condicional checkea si hay resultado que se envie un error.

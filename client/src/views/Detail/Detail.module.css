@@ -1,0 +1,73 @@
+.all{
+    
+    background-image: url("../../img/FondoTodos.jpg");
+    background-size:contain;
+    
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.detailContainer{
+    border: 5px solid rgb(151, 26, 197);
+    border-radius: 10px;
+    background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
+    width: 795px;
+    height: auto;
+    
+
+}
+
+
+
+.name{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color: white;
+    margin-top: 15px;
+    font-size: 50px;
+
+}
+
+.detail{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color: white;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.image{
+    width: 350px;
+    height:350px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.platforms{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.genres{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    color: white;
+    font-size: 20px;
+}
+

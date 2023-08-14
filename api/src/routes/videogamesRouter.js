@@ -9,9 +9,8 @@ const {
 const videogamesRouter = Router();
 
 const validate = (req, res, next) => {
-	const { name, platforms } = req.body;
+	const { name } = req.body;
 	if (!name) return res.status(400).json({ error: "Missing name" });
-	if (!platforms) return res.status(400).json({ error: "Missing platforms" });
 
 	next();
 };

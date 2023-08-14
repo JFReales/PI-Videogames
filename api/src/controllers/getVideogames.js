@@ -1,7 +1,6 @@
 const axios = require("axios");
 require("dotenv").config();
 const { Videogame, Genre } = require("../db");
-const db = require("../db");
 const { API_KEY } = process.env;
 
 ////   se hace la consulta a la api iterandola 5 veces para lograr
