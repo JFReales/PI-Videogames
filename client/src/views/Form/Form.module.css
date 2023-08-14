@@ -13,7 +13,7 @@
 }
 
 .formContainer{
-    border: 5px solid rgb(151, 26, 197);
+    border: 3px solid rgb(151, 26, 197);
     border-radius: 10px;
     background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
     width: 795px;

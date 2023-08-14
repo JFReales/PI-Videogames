@@ -75,8 +75,8 @@ const Home = () => {
 						<div className={style.filter}>
 							Name:
 							<select className={style.select} onChange={handleOrder}>
-								<option value="A">Original</option>
-								<option value="Original">A - Z</option>
+								<option value="Original">Original</option>
+								<option value="A">A - Z</option>
 								<option value="D">Z - A</option>
 							</select>
 						</div>

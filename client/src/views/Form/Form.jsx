@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createVideogame, getGenres, getPlatforms } from "../../redux/actions";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import validation from "./validations";
 import style from "./Form.module.css";
 
@@ -11,7 +11,7 @@ const Form = () => {
 	const platforms = useSelector((state) => state.platforms);
 	const genres = useSelector((state) => state.genres);
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [form, setForm] = useState({
 		name: "",
@@ -29,6 +29,8 @@ const Form = () => {
 		platforms: [],
 		genres: [],
 	});
+
+	// const [button, setButton] = useState(false);
 
 	useEffect(() => {
 		dispatch(getPlatforms());
@@ -96,11 +98,10 @@ const Form = () => {
 		}));
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		dispatch(getGenres(event.target.value));
 		dispatch(createVideogame(form));
-		navigate("/home");
 	};
 
 	return (
@@ -172,7 +173,7 @@ const Form = () => {
 						/>
 					</div>
 					<div className={style.rating}>
-						<label>Rating: </label>
+						<label>Rating (1-5): </label>
 						<input
 							className={style.input}
 							type="range"

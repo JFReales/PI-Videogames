@@ -20,6 +20,7 @@ const initialState = {
 	detail: {},
 	filtered: [],
 	platforms: [],
+	videogamesFiltered: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,15 +48,26 @@ const rootReducer = (state = initialState, action) => {
 
 		case FILTER_BY_ORIGEN:
 			let videogamesOrigin = [...state.allGames];
+			let videogamesSearch = [...state.videogamesFiltered];
 
-			if (action.payload === "bd") {
-				videogamesOrigin = videogamesOrigin.filter((game) => game.createdBd);
-			} else if (action.payload === "api") {
-				videogamesOrigin = videogamesOrigin.filter((game) => !game.createdBd);
-			} else if (action.payload === "All") {
-				videogamesOrigin = [...state.videogames];
+			if (videogamesSearch.length > 0) {
+				if (action.payload === "bd") {
+					videogamesOrigin = videogamesSearch.filter((game) => game.createdBd);
+				} else if (action.payload === "api") {
+					videogamesOrigin = videogamesSearch.filter((game) => !game.createdBd);
+				} else if (action.payload === "All") {
+					videogamesOrigin = [...state.videogamesFiltered];
+				}
 			} else {
-				window.alert("No hay coincidencias");
+				if (action.payload === "bd") {
+					videogamesOrigin = videogamesOrigin.filter((game) => game.createdBd);
+				} else if (action.payload === "api") {
+					videogamesOrigin = videogamesOrigin.filter((game) => !game.createdBd);
+				} else if (action.payload === "All") {
+					videogamesOrigin = [...state.videogames];
+				} else {
+					window.alert("No hay coincidencias");
+				}
 			}
 
 			return {
@@ -67,7 +79,7 @@ const rootReducer = (state = initialState, action) => {
 			try {
 				return {
 					...state,
-					videogames: [...action.payload],
+					videogamesFiltered: [...action.payload],
 					filtered: [...action.payload],
 				};
 			} catch (error) {
@@ -77,26 +89,39 @@ const rootReducer = (state = initialState, action) => {
 		case ORDER_BY:
 			let videogamesFilteredCopy = [...state.filtered];
 			let allVideogamesCopy = [...state.videogames];
+			let videogamesOnSearch = [...state.videogamesFiltered];
 			let videogamesSort;
 
-			if (videogamesFilteredCopy.length > 0) {
-				videogamesSort = videogamesFilteredCopy.sort((a, b) =>
-					a.name.localeCompare(b.name)
-				);
+			if (videogamesOnSearch.length > 0) {
+				if (action.payload === "Original") {
+					videogamesSort = videogamesOnSearch;
+				} else if (action.payload === "A") {
+					videogamesSort = videogamesOnSearch.sort((a, b) =>
+						a.name.localeCompare(b.name)
+					);
+				} else if (action.payload === "D") {
+					videogamesSort = videogamesOnSearch.sort((a, b) =>
+						a.name.localeCompare(b.name)
+					);
+					videogamesSort.reverse();
+				}
 			} else {
-				videogamesFilteredCopy = allVideogamesCopy.sort((a, b) =>
-					a.name.localeCompare(b.name)
-				);
-			}
-
-			if (action.payload === "Original") {
-				videogamesSort = videogamesFilteredCopy;
-			}
-
-			if (action.payload === "D") {
-				videogamesSort.reverse();
-			} else if (action.payload === "A") {
-				videogamesSort = initialState.videogames;
+				if (videogamesFilteredCopy.length > 0) {
+					videogamesSort = videogamesFilteredCopy.sort((a, b) =>
+						a.name.localeCompare(b.name)
+					);
+				} else {
+					videogamesFilteredCopy = allVideogamesCopy.sort((a, b) =>
+						a.name.localeCompare(b.name)
+					);
+				}
+				if (action.payload === "A") {
+					videogamesSort = videogamesFilteredCopy;
+				} else if (action.payload === "D") {
+					videogamesSort.reverse();
+				} else if (action.payload === "Original") {
+					videogamesSort = initialState.videogames;
+				}
 			}
 
 			return {
@@ -107,24 +132,40 @@ const rootReducer = (state = initialState, action) => {
 		case ORDER_BY_RATING:
 			let videogamesRating = [...state.filtered];
 			let allVideogamesRating = [...state.videogames];
+			let videoGamesSearchBar = [...state.videogamesFiltered];
 			let videogamesSortRating;
 
-			if (videogamesRating.length > 0) {
-				videogamesSortRating = videogamesRating.sort(
-					(a, b) => b.rating - a.rating
-				);
+			if (videoGamesSearchBar.length > 0) {
+				if (action.payload === "Original") {
+					videogamesSortRating = videoGamesSearchBar;
+				} else if (action.payload === "LR") {
+					videogamesSortRating = videogamesRating.sort(
+						(a, b) => b.rating - a.rating
+					);
+					videogamesSortRating.reverse();
+				} else if (action.payload === "TR") {
+					videogamesSortRating = videogamesRating.sort(
+						(a, b) => b.rating - a.rating
+					);
+				}
 			} else {
-				videogamesSortRating = allVideogamesRating.sort(
-					(a, b) => b.rating - a.rating
-				);
-			}
+				if (videogamesRating.length > 0) {
+					videogamesSortRating = videogamesRating.sort(
+						(a, b) => b.rating - a.rating
+					);
+				} else {
+					videogamesSortRating = allVideogamesRating.sort(
+						(a, b) => b.rating - a.rating
+					);
+				}
 
-			if (action.payload === "LR") {
-				videogamesSortRating.reverse();
-			} else if (action.payload === "Original") {
-				videogamesSortRating = initialState.videogames;
-			} else if (action.payload === "TR") {
-				videogamesSortRating;
+				if (action.payload === "LR") {
+					videogamesSortRating.reverse();
+				} else if (action.payload === "Original") {
+					videogamesSortRating = initialState.videogames;
+				} else if (action.payload === "TR") {
+					videogamesSortRating;
+				}
 			}
 
 			return {
@@ -134,23 +175,42 @@ const rootReducer = (state = initialState, action) => {
 
 		case FILTER_BY_GENRES:
 			let videogamesFilterGenre = [...state.videogames];
+			let videogamesFilterSearch = [...state.videogamesFiltered];
 
-			if (videogamesFilterGenre.length > 0) {
-				videogamesFilterGenre = videogamesFilterGenre.filter((game) =>
-					game.genres.includes(action.payload)
-				);
+			if (videogamesFilterSearch.length > 0) {
+				if (action.payload === "All") {
+					videogamesFilterGenre = videogamesFilterSearch;
+				} else {
+					videogamesFilterGenre = videogamesFilterSearch.filter((game) =>
+						game.genres.includes(action.payload)
+					);
+					if (videogamesFilterGenre.length === 0 && action.payload !== "All") {
+						window.alert("No hay coincidencias");
+						videogamesFilterGenre = [...state.videogamesFiltered];
+					}
+				}
 			} else {
-				videogamesFilterGenre = state.videogames.filter((game) =>
-					game.genres.includes(action.payload)
-				);
-			}
+				// if (videogamesFilterGenre.length === 0 && action.payload !== "All") {
+				// 	window.alert("No hay coincidencias");
+				// 	videogamesFilterGenre = [...state.videogames];
+				// }
+				if (videogamesFilterGenre.length > 0) {
+					videogamesFilterGenre = videogamesFilterGenre.filter((game) =>
+						game.genres.includes(action.payload)
+					);
+				} else {
+					videogamesFilterGenre = state.videogames.filter((game) =>
+						game.genres.includes(action.payload)
+					);
+				}
 
-			if (action.payload === "All") {
-				videogamesFilterGenre = initialState.videogames;
-			}
-			if (videogamesFilterGenre.length === 0 && action.payload !== "All") {
-				window.alert("No hay coincidencias");
-				videogamesFilterGenre = [...state.videogames];
+				if (action.payload === "All") {
+					videogamesFilterGenre = initialState.videogames;
+				}
+				if (videogamesFilterGenre.length === 0 && action.payload !== "All") {
+					window.alert("No hay coincidencias");
+					videogamesFilterGenre = [...state.videogames];
+				}
 			}
 
 			return {

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export default function validation({
 	name,
 	platforms,
@@ -6,7 +7,9 @@ export default function validation({
 }) {
 	let error = {};
 
-	const regexUrlImg = /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i;
+	const regexUrlImg =
+		/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/i;
+	const regexImg = /(http[s]?:\/\/.*\.(?:png|jpg|gif|svg|jpeg))/i;
 
 	if (!name) {
 		error.name = "El nombre no puede estar vacío";
@@ -26,7 +29,9 @@ export default function validation({
 	if (platforms.length > 10) {
 		error.platforms = "El videojuego no puede tener más de 10 plataformas";
 	}
-	if (!regexUrlImg.test(background_image)) {
+	if (regexUrlImg.test(background_image) || regexImg.test(background_image)) {
+		error.background_image = "";
+	} else {
 		error.background_image = "Debe ser una url de una imagen";
 	}
 	return error;
