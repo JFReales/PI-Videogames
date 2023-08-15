@@ -2,6 +2,7 @@
     
     background-image: url("../../img/FondoTodos.jpg");
     background-size:contain;
+    min-height: 100vh;
     
 }
 

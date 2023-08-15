@@ -10,7 +10,7 @@ const NavBar = () => {
 					<button className={style.link}>INICIO</button>
 				</Link>
 				<Link to="/create">
-					<button className={style.link}>FORMULARIO</button>
+					<button className={style.link}>AGREGÁ TU JUEGO</button>
 				</Link>
 				<div className={style.searchBar}>
 					<SearchBar />

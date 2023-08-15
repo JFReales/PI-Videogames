@@ -104,9 +104,15 @@ const Form = () => {
 		dispatch(getGenres(event.target.value));
 		dispatch(createVideogame(form));
 		alert("Juego creado exitosamente");
-		// setTimeout(() => {
-		// 	alert("Juego creado exitosamente");
-		// }, 2000);
+		setForm({
+			name: "",
+			background_image: "",
+			description: "",
+			platforms: [],
+			released: "",
+			rating: 0,
+			genres: [],
+		});
 	};
 
 	return (
