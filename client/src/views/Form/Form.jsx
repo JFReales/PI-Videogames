@@ -30,7 +30,7 @@ const Form = () => {
 		genres: [],
 	});
 
-	// const [button, setButton] = useState(false);
+	const [button, setButton] = useState("");
 
 	useEffect(() => {
 		dispatch(getPlatforms());
@@ -43,6 +43,7 @@ const Form = () => {
 
 		setError(validation({ ...form, [property]: value }));
 		setForm({ ...form, [property]: value });
+		setButton(value);
 	};
 
 	// const validate = (form) => {
@@ -207,7 +208,12 @@ const Form = () => {
 						{error.genres && <p className={style.errors}>{error.genres}</p>}
 					</div>
 					<div className={style.buttonContainer}>
-						<button className={style.button} type="submit">
+						<button
+							className={style.button}
+							type="submit"
+							disabled={!button}
+							style={{ backgroundColor: !button ? "red" : "transparent" }}
+						>
 							CREAR
 						</button>
 					</div>
