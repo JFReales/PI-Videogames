@@ -1,11 +1,8 @@
-/// Se importa el módulo axios para realizar solicitudes HTTP.
 const axios = require("axios");
-/// Se importa el módulo dotenv y apy_key para cargar variables de entorno desde un archivo
 require("dotenv").config();
 const { API_KEY } = process.env;
-//Se importan los modelos
 const { Genre } = require("../db");
-///Se declara una función asíncrona
+
 const getGenres = async () => {
 	///se utiliza la funcion axios.get para realizar una solicitud
 	const response = await axios.get(

@@ -102,6 +102,10 @@ const Form = () => {
 		event.preventDefault();
 		dispatch(getGenres(event.target.value));
 		dispatch(createVideogame(form));
+		alert("Juego creado exitosamente");
+		// setTimeout(() => {
+		// 	alert("Juego creado exitosamente");
+		// }, 2000);
 	};
 
 	return (

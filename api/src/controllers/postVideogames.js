@@ -1,5 +1,4 @@
 const { getVideogameQuery } = require("./getVideogamesQuery");
-/// importo los modelos de la base de datos
 const { Videogame, Genre } = require("../db");
 
 ///// en este componente se crea el videogame con la informacion enviada por el form
@@ -24,7 +23,12 @@ const createVideogame = async (
 		return {
 			error: "El juego ya existe",
 		};
+	} else if (!background_image) {
+		return {
+			error: "Imagen vacía",
+		};
 	}
+
 	// el condicional checkea si hay resultado que se envie un error.
 	// el segundo condicional hace que si no hay resultado se cree el juego en la base de datos
 	else {

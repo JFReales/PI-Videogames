@@ -26,7 +26,12 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_VIDEOGAMES:
-			return { ...state, videogames: action.payload, allGames: action.payload };
+			return {
+				...state,
+				videogames: action.payload,
+				allGames: action.payload,
+				filtered: action.payload,
+			};
 
 		case GET_VIDEOGAME_DETAIL:
 			return { ...state, detail: action.payload };
@@ -174,7 +179,7 @@ const rootReducer = (state = initialState, action) => {
 			};
 
 		case FILTER_BY_GENRES:
-			let videogamesFilterGenre = [...state.videogames];
+			let videogamesFilterGenre = [...state.filtered];
 			let videogamesFilterSearch = [...state.videogamesFiltered];
 
 			if (videogamesFilterSearch.length > 0) {
