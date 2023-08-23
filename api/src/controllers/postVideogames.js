@@ -18,12 +18,17 @@ const createVideogame = async (
 	let nombre = apiRepeated.find(
 		(game) => game.name.toLowerCase() === name.toLowerCase()
 	);
+	const regexUrlImg =
+		/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/i;
+	const regexImg = /(http[s]?:\/\/.*\.(?:png|jpg|gif|svg|jpeg))/i;
 
 	if (nombre) {
 		return {
 			error: "El juego ya existe",
 		};
-	} else if (!background_image) {
+	}
+
+	if (!background_image) {
 		return {
 			error: "Imagen vacía",
 		};
@@ -49,7 +54,7 @@ const createVideogame = async (
 		/// Se utiliza el método addGenres del objeto newVideogame para asociar los géneros encontrados
 		///   (genreBd) con el juego recién creado.
 		newVideogame.addGenres(genreBd);
-		return newVideogame;
+		return { newVideogame, message: "Juego creado satisfactoriamente" };
 	}
 };
 

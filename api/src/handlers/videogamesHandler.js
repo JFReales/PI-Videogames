@@ -54,7 +54,7 @@ const postVideogamesHandler = async (req, res) => {
 			genres,
 		} = req.body;
 
-		const newVideogame = await createVideogame(
+		const response = await createVideogame(
 			name,
 			description,
 			platforms,
@@ -64,10 +64,10 @@ const postVideogamesHandler = async (req, res) => {
 			genres
 		);
 
-		if (newVideogame.error) {
-			return res.status(404).send(newVideogame.error);
+		if (response.error) {
+			return res.status(400).send(response.error);
 		}
-		return res.status(200).send("Videogame created");
+		return res.status(201).send(response);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}
