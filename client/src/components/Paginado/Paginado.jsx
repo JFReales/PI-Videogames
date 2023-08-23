@@ -36,7 +36,9 @@ const Paginado = ({
 					{numeroDePaginas.map((numero) => (
 						<button
 							key={numero}
-							onClick={() => handlerPagina(numero)}
+							onClick={() => {
+								handlerPagina(numero);
+							}}
 							className={style.button}
 						>
 							{numero}

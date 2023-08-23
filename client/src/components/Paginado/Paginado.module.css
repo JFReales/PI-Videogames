@@ -1,6 +1,6 @@
 .button{
     
-    font-size: 1rem;
+    font-size: 1.5rem;
     background: linear-gradient(rgb(61, 42, 134),rgb(51, 29, 101),rgb(11, 3, 24));
     color: white;
     border: 2px solid rgb(151, 26, 197);
@@ -16,7 +16,12 @@
     
 }
 
+.button:focus{
+    background: violet;
+}
+
 .paginas{
     display: flex;
     
 }
+

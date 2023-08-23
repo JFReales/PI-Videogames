@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 
 import axios from "axios";
+// import { log } from "console";
 
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
@@ -138,18 +139,18 @@ export const orderBy = (params) => {
 export const createVideogame = (payload) => {
 	return async function (dispatch) {
 		try {
-			const response = await axios.post(
+			const { data } = await axios.post(
 				"http://localhost:3001/videogames",
 				payload
 			);
-
+			alert(data.message);
 			return dispatch({
 				type: CREATE_VIDEOGAME,
-				payload: response,
+				payload: data.newVideogame,
 			});
 		} catch (error) {
 			// Aquí puedes manejar el error de acuerdo a tus necesidades
-			alert(error.request.response);
+			alert(error.response.data);
 		}
 	};
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createVideogame, getGenres, getPlatforms } from "../../redux/actions";
@@ -31,6 +32,8 @@ const Form = () => {
 	});
 
 	const [button, setButton] = useState("");
+	const [checkboxGenres, setCheckboxGenres] = useState({});
+	const [checkboxPlatforms, setCheckboxPlatforms] = useState({});
 
 	useEffect(() => {
 		dispatch(getPlatforms());
@@ -41,26 +44,17 @@ const Form = () => {
 		const property = event.target.name;
 		const value = event.target.value;
 
-		setError(validation({ ...form, [property]: value }));
 		setForm({ ...form, [property]: value });
+		setError(
+			validation({
+				...form,
+				[property]: value,
+				checkboxGenres,
+				checkboxPlatforms,
+			})
+		);
 		setButton(value);
 	};
-
-	// const validate = (form) => {
-	// 	if (
-	// 		/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
-	// 			form.background_image
-	// 		) ||
-	// 		form.background_image === ""
-	// 	) {
-	// 		setError({ ...error, background_image: "" });
-	// 	} else {
-	// 		setError({
-	// 			...error,
-	// 			background_image: "Hay un error en la background_imagen",
-	// 		});
-	// 	}
-	// };
 
 	const handlePlatformChange = (event) => {
 		const { value, checked } = event.target;
@@ -75,11 +69,12 @@ const Form = () => {
 				platforms: form.platforms.filter((p) => p !== value),
 			}));
 		}
-		setError((prevErrors) => ({
-			...prevErrors,
-			platforms: [],
-		}));
+		setCheckboxPlatforms({ ...checkboxPlatforms, [value]: checked });
 	};
+	useEffect(() => {
+		setError(validation({ ...form, checkboxPlatforms, checkboxGenres }));
+	}, [checkboxPlatforms, checkboxGenres]);
+
 	const handleGenresChange = (event) => {
 		const { value, checked } = event.target;
 		if (checked) {
@@ -93,17 +88,48 @@ const Form = () => {
 				genres: form.genres.filter((genre) => genre !== value),
 			}));
 		}
-		setError((prevErrors) => ({
-			...prevErrors,
-			genres: [],
-		}));
+		setCheckboxGenres({ ...checkboxGenres, [value]: checked });
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		if (!form.name) {
+			alert("El campo nombre no puede estar vacio");
+			return;
+		}
+
+		if (!form.background_image) {
+			alert("El campo imagen no puede estar vacio");
+			return;
+		}
+
+		if (error.background_image) {
+			alert("El campo imagen debe ser una url");
+			return;
+		}
+
+		if (!form.released) {
+			alert("Debe seleccionar una fecha de lanzamiento");
+			return;
+		}
+
+		if (error.genres) {
+			alert("Debes seleccionar al menos un género");
+			return;
+		}
+		if (error.platforms) {
+			alert("Debes seleccionar al menos una plataforma");
+			return;
+		}
+
+		if (!form.description) {
+			alert("El campo descripción no puede estar vacio");
+			return;
+		}
+
 		dispatch(getGenres(event.target.value));
 		dispatch(createVideogame(form));
-		alert("Juego creado exitosamente");
+
 		setForm({
 			name: "",
 			background_image: "",
@@ -117,7 +143,11 @@ const Form = () => {
 
 	return (
 		<div className={style.all}>
-			<form onSubmit={handleSubmit} className={style.container}>
+			<form
+				noValidate
+				onSubmit={(e) => handleSubmit(e)}
+				className={style.container}
+			>
 				<div className={style.formContainer}>
 					<label className={style.titulo}>Formulario de creación </label>
 					<div className={style.name}>
