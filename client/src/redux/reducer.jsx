@@ -125,7 +125,7 @@ const rootReducer = (state = initialState, action) => {
 				} else if (action.payload === "D") {
 					videogamesSort.reverse();
 				} else if (action.payload === "Original") {
-					videogamesSort = initialState.videogames;
+					videogamesSort = videogamesFilteredCopy;
 				}
 			}
 
@@ -167,7 +167,7 @@ const rootReducer = (state = initialState, action) => {
 				if (action.payload === "LR") {
 					videogamesSortRating.reverse();
 				} else if (action.payload === "Original") {
-					videogamesSortRating = initialState.videogames;
+					videogamesSortRating = videogamesRating;
 				} else if (action.payload === "TR") {
 					videogamesSortRating;
 				}
